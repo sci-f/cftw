@@ -6,7 +6,7 @@ Competitive Containers.
 
 **under development!**
 
-These modules are not yet ready for use. More to come soon. To follow our development, please reference our [documentation](docs).
+These modules are not yet ready for use. More to come soon. To follow our development, please reference our [documentation](https://containers-ftw.github.io/cftw).
 
 
 ## Installation
