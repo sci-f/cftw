@@ -22,9 +22,9 @@ This base repo, a module called `cftw` will provide command line functions for d
 We don't anticipate asking the user to need to install the module directly on his or her system, it will be packaged in the container recipes that he/she users to generate the final result. Templates (e.g., bases for different kinds of analyses, like providing a jupyter notebook) can be programatically obtainable with this softare, but they can also be downloaded or copy pasted directly from Github. This documentation base will review the following:
 
 
- [Competition Templates](templates.md): This is an overview of a competition template, meaning how it works on the back end, with simple examples of how to generate a new template.
- [Competition Server](): This (will be) documentation for how to host a simple competition. We plan to provide this interface for you, but you are free to deploy it yourself.
- [Submitting an Entry](): This will review how to browse and find competitions of interest, and submit an entry.
+ - [Competition Templates](templates.md): This is an overview of a competition template, meaning how it works on the back end, with simple examples of how to generate a new template.
+ - [Competition Server](): This (will be) documentation for how to host a simple competition. We plan to provide this interface for you, but you are free to deploy it yourself.
+ - [Submitting an Entry](): This will review how to browse and find competitions of interest, and submit an entry.
 
 
 For this first test, we will primarily be using data that is usable on a local machine (e.g., no large cluster jobs) as this is the simpler of the two use cases. Stay tuned!
