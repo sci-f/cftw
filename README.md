@@ -1,6 +1,8 @@
 # Containers FTW (cftw)
 
-Tools for competitive containers.
+Competitive Containers.
+
+![img/containers-ftw.png]img/containers-ftw.png
 
 **under development!**
 
