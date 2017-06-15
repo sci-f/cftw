@@ -81,4 +81,10 @@ Right now we go through the pain of publishing and then put up the false idea th
 #### Encouraging Sharing Analyses
 This is also a cool approach because one repo is associated with a scientific question, a metric for assessing it, and containers that (each on its own) could be built to assess it (in all the different ways that people submit PRs to do).
 
-This is along the lines of what I'm currently thinking.
+#### Cloud Competitions!
+What the above doesn't capture is answering questions like "which one is fastest? Which one is most robust to tweaks or changes of the underlying host?" What you could do, given some repo that has multiple solutions to produce "the same thing" - is launch them (at the same time) on separate cloud instances, sort of "race" one another, and then come back with a result. They would all be running in parallel, at the same time, so you could likely even watch. That would be a cool setup for a competition, something like:
+
+ - competitions have X days to submit a PR, get their spec added to the repo (maybe at this point we just evaluate the data structure and don't provide a comparison of results, aka the leaderboard)
+ - at some regular intervals (or end date), we launch the repo to the cloud builders, and participants watch them go in real time, and see changing metrics, and then the results!
+
+Yeah that's pretty cool! :_) This is along the lines of what I'm currently thinking.
