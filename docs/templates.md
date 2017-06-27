@@ -124,5 +124,3 @@ singularity run -B $PWD:/opt/notebooks -B $HOME/Downloads/data:/data jupyter.img
 ```
 
 We will discuss instructions and interacting with data more in a bit.
-
-**under development**

@@ -1,0 +1,33 @@
+Bootstrap: docker
+From: ubuntu:16.04
+
+%files
+-R analysis/* /code/analysis
+-R functions/* /code/functions
+-R data/input/* /data/input
+
+%labels
+CONTAINERSFTW_TEMPLATE ubuntu16.04-python2
+CONTAINERSFTW_COMPETITION_HOST containersftw
+
+
+%runscript
+
+     # This will print the scientific result!
+     /usr/bin/python /code/analysis/main.py
+
+%post
+     
+     # Data directories
+     mkdir -p /data/input   # data included with container
+     mkdir -p /data/work    # working directory
+     mkdir -p /data/mnt     # mounted datasets
+
+     # Result directories
+     mkdir -p /result/analysis
+     mkdir -p /result/web
+     mkdir -p /result/pub
+
+     apt-get update && apt-get install -y python git vim nginx
+     apt-get autoremove -y
+     apt-get clean
