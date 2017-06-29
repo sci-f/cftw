@@ -67,10 +67,19 @@ def get_template(templates,output_folder):
         if os.path.exists(path):
             if os.path.isdir(path):
                 bot.debug("Copying folder template %s to %s" %(filename,dirname))
-                shutil.copytree(path,finished)
+                try:
+                    shutil.copytree(path,finished)
+                except FileExistsError:
+                    bot.error("Folder %s already exists, will not overwrite." %filename)
+                    sys.exit(1)
             else:
                 bot.debug("Copying file template %s to %s" %(filename,dirname))
-                shutil.copyfile(path,finished)
+                try:
+                    shutil.copyfile(path,finished)
+                except FileExistsError:
+                    bot.error("File %s already exists, will not overwrite." %filename)
+                    sys.exit(1)
+
             copied.append(finished)
         else:
             bot.warning("Could not find template %s" %template)
