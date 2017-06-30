@@ -46,7 +46,7 @@ export CONTAINERSFTW_WORK
      apt-get update && apt-get install -y python git vim nginx
      wget https://bootstrap.pypa.io/get-pip.py
      python get-pip.py && rm get-pip.py
-     pip install -y numpy scipy pandas scikit-learn ipython
+     pip install -y cftw
      
      #########################################################
      # Install additional software / libraries here
