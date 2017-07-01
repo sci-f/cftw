@@ -20,9 +20,10 @@ before_install:
   - cd $TRAVIS_BUILD_DIR/
 
 install:
-  - singularity create container.img
-  - sudo singularity bootstrap container.img Singularity 
+  - singularity create --size 8000 container.ftw
+  - sudo singularity bootstrap container.ftw Singularity 
 
 script:
+  - singularity run -B data/input:/data/input -B $TRAVIS_BUILD_DIR/analysis:/code --pwd /code container.ftw
   - python -m unittest discover -s $TRAVIS_BUILD_DIR/analysis/tests/ -p '[t|T]est*.py'
-  - ./container.img
+
