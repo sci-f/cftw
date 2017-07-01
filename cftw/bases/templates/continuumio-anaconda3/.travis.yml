@@ -20,7 +20,7 @@ before_install:
   - cd $TRAVIS_BUILD_DIR/
 
 install:
-  - singularity create container.img
+  - singularity create --size 8000 container.img
   - sudo singularity bootstrap container.img Singularity 
 
 script:
