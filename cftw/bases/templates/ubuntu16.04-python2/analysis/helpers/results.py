@@ -26,32 +26,30 @@ from .logger import bot
 import pandas
 import os
 
-RESULTBASE = os.environ.get("CONTAINERSFTW_RESULT",'/code/analysis/results/submission')
+RESULTBASE = os.environ.get("CONTAINERSFTW_RESULT",'/code/results')
 
 def save_result(result,result_type=None,sep=None,result_base=None):
     '''save a result required for the competition'''
 
     if result_type is None:
-        result_type = "model"
+        result_type = "submission"
 
     if sep is None:
         sep = ','
 
-    filename = get_resultfile(name=name,
+    filename = get_resultfile(name=result_type,
                               result_base=result_base)
 
     if filename is not None:
         if isinstance(result,pandas.DataFrame):
             result.to_csv(filename,index=False,sep=sep)
         else:
-            bot.error("%s is not a valid result type." %filename)
+            bot.error("%s is not a valid result type." %result_type)
     return filename
 
 
-def list_results(result_base):
+def list_results(result_base=None):
     '''list the results that a complete model must provide'''
-
-    bot.info("Submission must include:")
 
     if result_base is None:
         result_base = RESULTBASE
@@ -66,7 +64,6 @@ def list_results(result_base):
 
 
 
-
 def get_resultfile(name=None,result_base=None):
     '''get_resultfile returns the file for the result, or None if 
     not defined
@@ -74,7 +71,6 @@ def get_resultfile(name=None,result_base=None):
     results = list_results(result_base)
 
     if name is not None:
-
         name = os.path.splitext(name)[0].lower()
         if name in results:
             return results[name]

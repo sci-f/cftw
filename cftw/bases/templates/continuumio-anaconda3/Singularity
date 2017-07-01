@@ -14,8 +14,8 @@ CONTAINERSFTW_COMPETITION_NAME ""
 
 %environment
 CONTAINERSFTW_DATA=/data/input
-CONTAINERSFTW_RESULT=/code/analysis/results/submission
-CONTAINERSFTW_WORK=/code/analysis
+CONTAINERSFTW_RESULT=/code/results
+CONTAINERSFTW_WORK=/code
 export CONTAINERSFTW_DATA
 export CONTAINERSFTW_RESULT
 export CONTAINERSFTW_WORK
@@ -36,10 +36,7 @@ export CONTAINERSFTW_WORK
      mkdir -p $SINGULARITY_ROOTFS/code/analysis
      mkdir -p $SINGULARITY_ROOTFS/code/tests
 
-     cp -R analysis/* /code/analysis
      cp -R data/input/* /data/input
-
-     /bin/bash functions/download_data.sh
 
 
 %post
