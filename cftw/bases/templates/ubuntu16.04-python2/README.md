@@ -1,5 +1,7 @@
 # ContainersFTW Competition
 
+![img/containers-ftw.png](img/containers-ftw.png)
+
 This is a containersFTW competition container base! If you are a competition host, you should [read complete instructions here](https://containers-ftw.github.io) for how to edit this template. You can fill in empty links in the description alone with links to the repos wiki (for background and data) or just add sections to the README, or a docs folder. It's up to you, as long as the participant can find it. You can feel free to remove this section and replace with an introduction to yours.
 
 
