@@ -29,14 +29,16 @@ from cftw.utils import (
     tree,
     write_json
 )
-from .template import get_template
-from glob import glob
+from .template import (
+    get_template,
+    sub_template
+)
+
 import sys
 import os
 
 
-def generate_base(template,output_folder=None):
-
+def generate_base(template, name, output_folder=None):
     '''generation of a base means copying an entire template
     into the user's output folder. If None is specified, $PWD 
     is used
@@ -48,6 +50,23 @@ def generate_base(template,output_folder=None):
     bot.debug("Starting base generation in %s" %output_folder)
     template = get_template(template,output_folder)
     tree("%s/%s" %(output_folder,template))
-    bot.newline()
+
+    # The result folder is specific to the competition
+    results = '%s/analysis/results' %(template)
+    mkdir_p(results)
+    result_template = get_template(template='leaderboard',
+                                   template_type='results',
+                                   name=name,
+                                   output_folder=results)
+
+    # Substitute competition name in Singularity file,
+    # template
+    files = [ "%s/Singularity" %template,
+              "%s/.travis.yml" %template,
+              "%s/index.html" %result_template ]
+
+    for filey in files:
+        sub_template(filey,{"COMPETITION_NAME":name})
+
     bot.debug("Finished generation.")
-    return output_folder
+    return template

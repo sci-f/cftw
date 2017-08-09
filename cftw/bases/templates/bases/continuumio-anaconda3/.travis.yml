@@ -27,3 +27,13 @@ script:
   - singularity run -B data/input:/data/input -B $TRAVIS_BUILD_DIR/analysis:/code --pwd /code container.ftw
   - python -m unittest discover -s $TRAVIS_BUILD_DIR/analysis/tests/ -p '[t|T]est*.py'
 
+# TODO: keep a .tar.gz of entire site on surge
+# download entire thing to results folder, retrieve old json
+# as test: update json with competition result, if passes
+# push new surge site at end
+# containers-ftw.surge.sh
+
+deploy:
+  provider: surge
+  project: ./analysis/results
+  domain: containers-ftw.surge.sh  

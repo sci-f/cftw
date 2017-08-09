@@ -1,0 +1,74 @@
+{
+  "data": [
+    {
+      "name": "Tiger Nixon",
+      "rank": "System Architect",
+      "result": "$320,800"
+    },
+    {
+      "name": "Garrett Winters",
+      "rank": "Accountant",
+      "result": "$170,750"
+    },
+    {
+      "name": "Ashton Cox",
+      "rank": "Junior Technical Author",
+      "result": "$86,000"
+    },
+    {
+      "name": "Cedric Kelly",
+      "rank": "Senior Javascript Developer",
+      "result": "$433,060"
+    },
+    {
+      "name": "Airi Satou",
+      "rank": "Accountant",
+      "result": "$162,700"
+    },
+    {
+      "name": "Brielle Williamson",
+      "rank": "Integration Specialist",
+      "result": "$372,000"
+    },
+    {
+      "name": "Herrod Chandler",
+      "rank": "Sales Assistant",
+      "result": "$137,500"
+    },
+    {
+      "name": "Rhona Davidson",
+      "rank": "Integration Specialist",
+      "result": "$327,900"
+    },
+    {
+      "name": "Colleen Hurst",
+      "rank": "Javascript Developer",
+      "result": "$205,500"
+    },
+    {
+      "name": "Sonya Frost",
+      "rank": "Software Engineer",
+      "result": "$103,600"
+    },
+    {
+      "name": "Jena Gaines",
+      "rank": "Office Manager",
+      "result": "$90,560"
+    },
+    {
+      "name": "Quinn Flynn",
+      "rank": "Support Lead",
+      "result": "$342,000"
+    },
+    {
+      "name": "Charde Marshall",
+      "rank": "Regional Director",
+      "result": "$470,600"
+    },
+    {
+      "name": "Haley Kennedy",
+      "rank": "Senior Marketing Designer",
+      "result": "$313,500"
+    }
+ ]
+}

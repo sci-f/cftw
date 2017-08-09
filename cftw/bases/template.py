@@ -39,49 +39,44 @@ import os
 
 here = get_installdir()
 
-def list_templates():
-    templates_base = "%s/bases/templates" %here
+def list_templates(template_type="bases"):
+    templates_base = "%s/bases/templates/%s" %(here,template_type)
     names = [os.path.basename(x) for x in glob("%s/*" %templates_base)]
     return names
 
 
-def get_template(templates,output_folder):
-    '''get_template will copy one or more templates (based on filename off
+def sub_template(template_file,items):
+    '''replace some set of key/value pairs in a
+    template file (inplace) with the expectation
+    that a key should be within {{ }}'''
+    with open(template_file,'r') as filey:
+        content = filey.read()
+        for key,val in items.items():
+            key = "{{ %s }}" %key
+            content = content.replace(key,val)
+
+    with open (template_file,'w') as filey:
+        filey.writelines(content)
+    return template_file
+
+
+def get_template(template, output_folder, name=None, template_type="bases"):
+    '''get_template will copy a template (based on filename off
     of templates) into an output folder.
     '''
     if not os.path.exists(output_folder):
         bot.error("%s does not exist, please create first." %output_folder)
         sys.exit(1)    
 
-    templates_base = "%s/bases/templates" %here
-    dirname = os.path.basename(output_folder)
-    
-    copied = []
-    if not isinstance(templates,list):
-        templates = [templates]
+    if name is None:
+        name = os.path.basename(template)
 
-    for template in templates:
-        path = "%s/%s" %(templates_base,template)
-        filename = os.path.basename(template)
-        finished = "%s/%s" %(output_folder,filename)
-        if os.path.exists(path):
-            if os.path.isdir(path):
-                bot.debug("Copying folder template %s to %s" %(filename,dirname))
-                try:
-                    shutil.copytree(path,finished)
-                except FileExistsError:
-                    bot.error("Folder %s already exists, will not overwrite." %filename)
-                    sys.exit(1)
-            else:
-                bot.debug("Copying file template %s to %s" %(filename,dirname))
-                try:
-                    shutil.copyfile(path,finished)
-                except FileExistsError:
-                    bot.error("File %s already exists, will not overwrite." %filename)
-                    sys.exit(1)
-
-            copied.append(finished)
-        else:
-            bot.warning("Could not find template %s" %template)
-
-    return copied
+    templates_base = "%s/bases/templates/%s" %(here,template_type)
+    path = "%s/%s" %(templates_base,template)
+    finished = "%s/%s" %(output_folder,name) 
+    try:
+        shutil.copytree(path,finished)
+    except FileExistsError:
+        bot.error("Folder %s already exists, will not overwrite." %name)
+        sys.exit(1)
+    return finished

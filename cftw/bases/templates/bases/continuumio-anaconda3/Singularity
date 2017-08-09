@@ -10,11 +10,11 @@ From: continuumio/anaconda3
 %labels
 CONTAINERSFTW_TEMPLATE continuumio-anaconda3
 CONTAINERSFTW_COMPETITION_HOST containersftw
-CONTAINERSFTW_COMPETITION_NAME ""
+CONTAINERSFTW_COMPETITION_NAME "{{ COMPETITION_NAME }}"
 
 %environment
 CONTAINERSFTW_DATA=/data/input
-CONTAINERSFTW_RESULT=/code/results
+CONTAINERSFTW_RESULT=/code/{{ COMPETITION_NAME }}/results
 CONTAINERSFTW_WORK=/code
 export CONTAINERSFTW_DATA
 export CONTAINERSFTW_RESULT
@@ -28,9 +28,9 @@ export CONTAINERSFTW_WORK
      mkdir -p $SINGULARITY_ROOTFS/data/mnt     # mounted datasets
 
      # Result directories
-     mkdir -p $SINGULARITY_ROOTFS/code/results/submission
-     mkdir -p $SINGULARITY_ROOTFS/code/results/web
-     mkdir -p $SINGULARITY_ROOTFS/code/results/pub
+     mkdir -p $SINGULARITY_ROOTFS/code/results/{{ COMPETITION_NAME }}/submission
+     mkdir -p $SINGULARITY_ROOTFS/code/results/{{ COMPETITION_NAME }}/web
+     mkdir -p $SINGULARITY_ROOTFS/code/results/{{ COMPETITION_NAME }}/pub
 
      # Working code directories
      mkdir -p $SINGULARITY_ROOTFS/code/analysis

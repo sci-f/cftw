@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Containers-FTW {{ COMPETITION_NAME }}</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto" type="text/css">
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css" type="text/css">
+    
+    <style>
+
+    #header {
+        padding-bottom:30px;
+    }
+
+    body {font-family: 'Roboto', sans-serif;}
+
+    #ftw{
+        background-color:#4192da;
+        border: 1px solid #333;
+        border-radius: 10px;
+    }
+
+
+    /*Allow column header names to wrap lines*/
+    #ftw .col,
+    #ftw .col-row-handle {
+        white-space: normal;
+    }
+
+    /*Color the table rows*/
+    #ftw .row{
+        color:#fff;
+        background-color: #666;
+    }
+
+    /*Color even rows*/
+        #ftw .table .row:nth-child(even) {
+        background-color: #444;
+    }
+    </style>
+
+</head>
+<body>
+
+      <div id="header">
+        <h3>{{ COMPETITION_NAME }}</h3>
+      </div>
+      <table id="ftw" class="display" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+                <th>Name</th>
+                <th>Rank</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Rank</th>
+                <th>Result</th>
+            </tr>
+        </tfoot>
+    </table>
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#ftw').DataTable( {
+            "ajax": "leaderboard.json",
+            "columns": [
+                { "data": "name" },
+                { "data": "rank" },
+                { "data": "result" }
+            ]
+        } );
+
+        $("#ftw_filter").css('padding-bottom','30px')
+    } );
+    </script>    
+
+</body>
+</html>

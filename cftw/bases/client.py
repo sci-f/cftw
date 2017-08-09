@@ -43,6 +43,11 @@ def get_parser():
     
     # Generate
     init_parser = subparsers.add_parser("init")
+
+    init_parser.add_argument("--name","-n", dest='name', 
+                             help="competition folder name", 
+                             type=str, required=True)
+
     init_parser.add_argument("--template","-t", dest='template', 
                              help="starter template", 
                              type=str, default=None)
@@ -85,6 +90,7 @@ def main():
 
     # Initialize the message bot, with level above
     from cftw.logger import bot
+    from cftw.utils import mkdir_p
 
     if args.command == "init":
         from .init import generate_base
@@ -95,7 +101,9 @@ def main():
             subcommand_help("Please provide a base template with --template/-t. Available templates are: \n%s" %available,"init")            
 
         base = generate_base(template=args.template,
-                             output_folder=args.out)        
+                             output_folder=args.out,
+                             name=args.name)      
+ 
 
 
 def help():
