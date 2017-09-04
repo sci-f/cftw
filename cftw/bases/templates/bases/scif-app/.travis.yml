@@ -1,0 +1,39 @@
+language: python
+
+addons:
+  apt:
+    packages:
+      - python-pip
+
+sudo: true
+
+os: linux
+
+compiler:
+  - gcc
+
+before_install:
+  - sudo sed -i -e 's/^Defaults\tsecure_path.*$//' /etc/sudoers
+  - cd /tmp && git clone -b development https://www.github.com/singularityware/singularity.git && cd singularity
+  - echo $PWD && ls
+  - ./autogen.sh && ./configure --prefix=/usr/local && make && sudo make install
+  - cd $TRAVIS_BUILD_DIR/
+
+install:
+  - singularity create --size 8000 container.ftw
+  - sudo singularity bootstrap container.ftw Singularity 
+
+script:
+  - singularity run -B data/input:/data/input -B $TRAVIS_BUILD_DIR/analysis:/code --pwd /code container.ftw
+  - python -m unittest discover -s $TRAVIS_BUILD_DIR/analysis/tests/ -p '[t|T]est*.py'
+
+# TODO: keep a .tar.gz of entire site on surge
+# download entire thing to results folder, retrieve old json
+# as test: update json with competition result, if passes
+# push new surge site at end
+# containers-ftw.surge.sh
+
+deploy:
+  provider: surge
+  project: ./analysis/results
+  domain: containers-ftw.surge.sh  

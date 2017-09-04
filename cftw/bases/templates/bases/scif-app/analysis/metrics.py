@@ -48,7 +48,7 @@ def check_agreement(model,variables):
                                 check_data[check_data['signal'] == 1]['weight'].values
                               )
 
-    bot.info('KS metric %s %s' %(ks, ks < 0.09))
+    bot.info('KS metric %s %s' %(ks ks < 0.09))
     return ks
 
 

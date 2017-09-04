@@ -1,0 +1,58 @@
+BootStrap: docker
+From: continuumio/anaconda3
+
+
+%runscript
+
+    echo "This is a containers-ftw competition container!"
+    echo "The functions provided include:"
+    tree /scif/apps
+
+    echo "Type singularity --app <appname> <container>.img help to see help
+
+
+%labels
+CONTAINERSFTW_TEMPLATE scif-apps
+CONTAINERSFTW_COMPETITION_HOST containersftw
+CONTAINERSFTW_COMPETITION_NAME "{{ COMPETITION_NAME }}"
+
+%appinstall setup
+cp -R data/input/* /data/input
+
+
+%post
+
+     apt-get update && apt-get install -y git vim nginx
+     /opt/conda/bin/conda install -y numpy scikit-learn pandas 
+     
+     #########################################################
+     # Install global and shared software here
+     #########################################################
+
+
+     #########################################################
+
+     apt-get autoremove -y
+     apt-get clean
+
+
+%appinstall example
+
+    mkdir bin
+    # Executables in app folders "bin" are automatically on path
+    echo "echo 'Hello World!' $@" > bin/run-example.sh
+    chmod u+x bin/run.sh
+
+%apprun example
+
+    exec /bin/bash run-example.sh
+    # If not on path, call from folder directly
+    # exec /bin/bash /scif/apps/example/bin/run-example.sh
+
+%applabels example
+MAINTAINER vanessasaur
+
+
+%apphelp example
+This is the help file for the "example" app. Write usage,
+arguments, and other notes and instructions here.

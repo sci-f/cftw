@@ -46,7 +46,7 @@ def get_parser():
 
     init_parser.add_argument("--name","-n", dest='name', 
                              help="competition folder name", 
-                             type=str, required=True)
+                             type=str, default=None)
 
     init_parser.add_argument("--template","-t", dest='template', 
                              help="starter template", 
@@ -93,18 +93,10 @@ def main():
     from cftw.utils import mkdir_p
 
     if args.command == "init":
-        from .init import generate_base
-
-        if args.template is None:
-            from .template import list_templates
-            available = "\n".join(list_templates())
-            subcommand_help("Please provide a base template with --template/-t. Available templates are: \n%s" %available,"init")            
-
-        base = generate_base(template=args.template,
-                             output_folder=args.out,
-                             name=args.name)      
+        from .init import main
+        main(args,parser)
+        sys.exit(0)
  
-
 
 def help():
     parser = get_parser()

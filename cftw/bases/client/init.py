@@ -1,4 +1,6 @@
 '''
+init: initialize a new container competition
+
 The MIT License (MIT)
 
 Copyright (c) 2016-2017 Vanessa Sochat
@@ -23,12 +25,20 @@ SOFTWARE.
 
 '''
 
+from glob import glob
+import argparse
+import sys
+import os
+
+
+
 from cftw.logger import bot
 from cftw.utils import (
     mkdir_p,
     tree,
     write_json
 )
+
 from .template import (
     get_template,
     sub_template
@@ -48,7 +58,7 @@ def generate_base(template, name, output_folder=None):
 
     bot.newline()
     bot.debug("Starting base generation in %s" %output_folder)
-    template = get_template(template,output_folder)
+    template = get_template(template,output_folder,name)
     tree("%s/%s" %(output_folder,template))
 
     # The result folder is specific to the competition
@@ -70,3 +80,29 @@ def generate_base(template, name, output_folder=None):
 
     bot.debug("Finished generation.")
     return template
+
+
+
+def main(args,parser):
+
+
+    if args.template is None:
+        from .template import list_templates
+        available = "\n".join(list_templates())
+        subcommand_help("Please provide a base template with --template/-t. Available templates are: \n%s" %available,"init")            
+
+    base = generate_base(template=args.template,
+                         output_folder=args.out,
+                         name=args.name)      
+ 
+        
+def subcommand_help(message,command):
+    from cftw.logger import bot
+    bot.info(message)
+    bot.info("-------------------------------------------------------------")
+    bot.info("For help with %s, cftw %s --help" %(command,command))
+    sys.exit(1)
+
+
+if __name__ == '__main__':
+    main()
